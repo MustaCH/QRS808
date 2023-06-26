@@ -1,12 +1,152 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 import { styles } from "./style";
+import { COLORS } from "../../constants/themes/colors";
 
 const Form = ({ navigation }) => {
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [dni, setDni] = useState("");
+  const [email, setEmail] = useState("");
+  const [cantidadEntradas, setCantidadEntradas] = useState(1);
+  const [nombreError, setNombreError] = useState("");
+  const [apellidoError, setApellidoError] = useState("");
+  const [dniError, setDniError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const handleGuardarInvitado = () => {
+    // Aquí puedes llamar a la función para guardar los datos del invitado en Firebase
+  };
+
+  const isFormValid = () => {
+    return (
+      nombre !== "" &&
+      apellido !== "" &&
+      dni !== "" &&
+      email !== "" &&
+      nombreError === "" &&
+      apellidoError === "" &&
+      dniError === "" &&
+      emailError === ""
+    );
+  };
+
+  const validateField = (fieldName, value) => {
+    const nameRegex = /^[a-zA-Z]+$/;
+    const dniRegex = /^\d+$/;
+    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    let error = "";
+
+    switch (fieldName) {
+      case "nombre":
+        if (value !== "" && !nameRegex.test(value)) {
+          error = "*Ingresa un nombre válido*";
+        }
+        setNombreError(error);
+        break;
+      case "apellido":
+        if (value !== "" && !nameRegex.test(value)) {
+          error = "*Ingresa un apellido válido*";
+        }
+        setApellidoError(error);
+        break;
+      case "dni":
+        if (value !== "" && !dniRegex.test(value)) {
+          error = "*Ingresa un DNI válido*";
+        }
+        setDniError(error);
+        break;
+      case "email":
+        if (value !== "" && !emailRegex.test(value)) {
+          error = "*Ingresa un email válido*";
+        }
+        setEmailError(error);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleNombreChange = (value) => {
+    setNombre(value);
+    validateField("nombre", value);
+  };
+
+  const handleApellidoChange = (value) => {
+    setApellido(value);
+    validateField("apellido", value);
+  };
+
+  const handleDniChange = (value) => {
+    setDni(value);
+    validateField("dni", value);
+  };
+
+  const handleEmailChange = (value) => {
+    setEmail(value);
+    validateField("email", value);
+  };
+
+  const renderPickerItems = () => {
+    const items = [];
+    for (let i = 1; i <= 10; i++) {
+      items.push(<Picker.Item key={i} label={i.toString()} value={i} />);
+    }
+    return items;
+  };
+
   return (
     <View style={styles.container}>
-      <Text>FORM</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Ingresa datos del invitado:</Text>
+      </View>
+      <TextInput
+        style={styles.inputName}
+        placeholder="Nombre"
+        value={nombre}
+        onChangeText={handleNombreChange}
+      />
+      {nombreError !== "" && <Text style={styles.errorText}>{nombreError}</Text>}
+      <TextInput
+        style={styles.inputApellido}
+        placeholder="Apellido"
+        value={apellido}
+        onChangeText={handleApellidoChange}
+      />
+      {apellidoError !== "" && <Text style={styles.errorText}>{apellidoError}</Text>}
+      <TextInput
+        style={styles.inputDNI}
+        placeholder="DNI"
+        value={dni}
+        onChangeText={handleDniChange}
+        keyboardType="numeric"
+      />
+      {dniError !== "" && <Text style={styles.errorText}>{dniError}</Text>}
+      <TextInput
+        style={styles.inputMail}
+        placeholder="Email"
+        value={email}
+        onChangeText={handleEmailChange}
+        keyboardType="email-address"
+      />
+      {emailError !== "" && <Text style={styles.errorText}>{emailError}</Text>}
+      <Picker
+        style={styles.picker}
+        selectedValue={cantidadEntradas}
+        onValueChange={(value) => setCantidadEntradas(value)}>
+        {renderPickerItems()}
+      </Picker>
+      <Button
+        color={COLORS.secondary}
+        title="Generar"
+        onPress={handleGuardarInvitado}
+        disabled={!isFormValid()}
+      />
+      <View style={styles.helperContainer}>
+        <Text style={styles.helper}>*Se enviará una invitación vía email al invitado*</Text>
+      </View>
     </View>
   );
 };
