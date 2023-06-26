@@ -27,8 +27,12 @@ const TabsNavigator = () => {
         component={MainNavigator}
         options={{
           tabBarLabel: "HOME",
-          tabBarIcon: ({ focused, color, size }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={size}
+              color={focused ? COLORS.background : COLORS.secondary}
+            />
           ),
         }}
       />
@@ -37,11 +41,11 @@ const TabsNavigator = () => {
         component={ListNavigator}
         options={{
           tabBarLabel: "LISTA",
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, size }) => (
             <Ionicons
               name={focused ? "list-circle" : "list-circle-outline"}
               size={size}
-              color={color}
+              color={focused ? COLORS.background : COLORS.secondary}
             />
           ),
         }}
@@ -51,11 +55,11 @@ const TabsNavigator = () => {
         component={ScannerNavigator}
         options={{
           tabBarLabel: "SCANNER",
-          tabBarIcon: ({ focused, color, size }) => (
+          tabBarIcon: ({ focused, size }) => (
             <Ionicons
               name={focused ? "scan-circle" : "scan-circle-outline"}
               size={size}
-              color={color}
+              color={focused ? COLORS.background : COLORS.secondary}
             />
           ),
         }}

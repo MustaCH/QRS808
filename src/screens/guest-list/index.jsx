@@ -1,60 +1,50 @@
 import React, { useState, useEffect } from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
 import { View, FlatList, TextInput } from "react-native";
-import ListItem from "../../components/list-item/index";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import ListItem from "../../components/list-item";
+import { cargarInvitados, filtrarInvitados } from "../../store/actions/index";
 import { styles } from "./style";
-import { COLORS } from "../../constants/themes/colors";
+import { invitados } from "../../constants/data";
 
 const GuestList = () => {
-  const [invitados, setInvitados] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [filteredInvitados, setFilteredInvitados] = useState([]);
+  const [listaInvitados, setListaInvitados] = useState(invitados);
 
-  useEffect(() => {
-    // Aquí debes realizar la consulta a Firebase para obtener la lista de invitados
-    // y luego actualizar el estado 'invitados' con los datos obtenidos.
-    // Puedes utilizar Firebase SDK o cualquier otra biblioteca para interactuar con Firebase.
-    // Asegúrate de llamar a setInvitados con los datos obtenidos de Firebase.
-    // Ejemplo:
-    // const fetchedInvitados = await fetchInvitadosFromFirebase();
-    // setInvitados(fetchedInvitados);
-    // NOTA: El código para obtener los invitados desde Firebase no está incluido aquí ya que puede variar según tu implementación y la estructura de tu base de datos.
-    // Asegúrate de obtener los datos necesarios y actualizar el estado 'invitados' correctamente.
-  }, []);
+  //const [searchText, setSearchText] = useState("");
+  //const dispatch = useDispatch();
+  //const invitados = useSelector((state) => state.list.invitados);
+  //const invitadosFiltrados = useSelector((state) => state.list.invitadosFiltrados);
 
-  useEffect(() => {
-    filterInvitados(searchText);
-  }, [searchText]);
+  /*useEffect(() => {
+    dispatch(cargarInvitados());
+  }, [dispatch]);*/
 
-  const filterInvitados = (text) => {
-    const filtered = invitados.filter((invitado) => {
-      const nombreCompleto = `${invitado.nombre} ${invitado.apellido}`;
-      return nombreCompleto.toLowerCase().includes(text.toLowerCase());
-    });
-    setFilteredInvitados(filtered);
+  const onDelete = (id) => {
+    setListaInvitados(item.filter((item) => item.id !== id));
+    setListaInvitados(!listaInvitados);
   };
 
   const renderInvitado = ({ item }) => (
-    <ListItem nombre={item.nombre} apellido={item.apellido} dni={item.dni} email={item.email} />
+    <ListItem
+      id={item.id}
+      nombre={item.nombre}
+      apellido={item.apellido}
+      dni={item.dni}
+      email={item.email}
+      entradas={item.entradas}
+      onDelete={onDelete}
+    />
   );
+
+  //const keyExtractor = (item) => item.id.toString();
 
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Buscar por nombre"
-          value={searchText}
-          onChangeText={setSearchText}
-          placeholderTextColor="gray"
-        />
-        <Ionicons name="search" size={20} color={COLORS.tertiary} style={styles.searchIcon} />
+        <TextInput style={styles.input} placeholder="Buscar por nombre o apellido" />
+        <Ionicons name="search" size={20} style={styles.searchIcon} />
       </View>
-      <FlatList
-        data={filteredInvitados}
-        renderItem={renderInvitado}
-        keyExtractor={(item) => item.id.toString()}
-      />
+      <FlatList data={listaInvitados} renderItem={renderInvitado} />
     </View>
   );
 };

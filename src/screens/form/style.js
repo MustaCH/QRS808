@@ -63,9 +63,14 @@ export const styles = StyleSheet.create({
     width: "80%",
   },
 
+  buttonContainer: {
+    paddingVertical: 15,
+  },
+
   helperContainer: {
     marginVertical: 5,
   },
+
   helper: {
     fontSize: 11,
     fontFamily: "MerriweatherSans-Regular",
