@@ -9,7 +9,7 @@ export const cargarInvitados = () => {
       const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/invitados.json`);
       const data = await response.json();
 
-      console.warn(data);
+      //console.warn(data);
 
       if (data) {
         const invitados = Object.keys(data).map((key) => ({

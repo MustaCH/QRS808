@@ -1,4 +1,6 @@
-import { FILTRAR_INVITADOS, CARGAR_INVITADOS } from "../actions/index";
+import { listTypes } from "../types";
+
+const { CARGAR_INVITADOS, FILTRAR_INVITADOS } = listTypes;
 
 const initialState = {
   invitados: [],

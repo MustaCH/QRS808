@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, FlatList, TextInput } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { ListItem } from "../../components/index";
-import { cargarInvitados, filtrarInvitados } from "../../store/actions/index";
+import { cargarInvitados } from "../../store/actions";
 import { styles } from "./style";
 import { COLORS } from "../../constants/themes/colors";
 
@@ -40,6 +40,7 @@ const GuestList = () => {
           style={styles.input}
           placeholder="Buscar por nombre o apellido"
           placeholderTextColor={COLORS.white}
+          keyboardType="web-search"
         />
         <Ionicons name="search" size={20} style={styles.searchIcon} color={COLORS.tertiary} />
       </View>
