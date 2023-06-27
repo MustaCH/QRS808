@@ -23,7 +23,7 @@ const TabsNavigator = () => {
         tabBarInactiveBackgroundColor: COLORS.primary,
       }}>
       <BottomTab.Screen
-        name="HOME"
+        name="FORM"
         component={MainNavigator}
         options={{
           tabBarLabel: "HOME",

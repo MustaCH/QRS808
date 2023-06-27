@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { formReducer, listReducer } from "./reducers/index";
+import { formReducer, guestListReducer } from "./reducers/index";
 
 const rootReducer = combineReducers({
   form: formReducer,
-  list: listReducer,
+  guestList: guestListReducer,
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));

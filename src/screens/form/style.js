@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+  },
+
+  contentContainer: {
+    flex: 1,
+    backgroundColor: COLORS.background,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -20,51 +25,23 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-  inputName: {
-    color: COLORS.black,
-    backgroundColor: COLORS.white,
-    marginVertical: 5,
-    width: "80%",
-    borderRadius: 4,
-    padding: 10,
-  },
-
-  inputApellido: {
-    color: COLORS.black,
-    backgroundColor: COLORS.white,
-    marginVertical: 5,
-    width: "80%",
-    borderRadius: 4,
-    padding: 10,
-  },
-
-  inputDNI: {
-    color: COLORS.black,
-    backgroundColor: COLORS.white,
-    marginVertical: 5,
-    width: "80%",
-    borderRadius: 4,
-    padding: 10,
-  },
-
-  inputMail: {
-    color: COLORS.black,
-    backgroundColor: COLORS.white,
-    marginVertical: 5,
-    width: "80%",
-    borderRadius: 4,
-    padding: 10,
+  labelEntradas: {
+    fontSize: 14,
+    fontFamily: "MerriweatherSans-Medium",
+    color: COLORS.tertiary,
+    textAlign: "center",
   },
 
   picker: {
     color: COLORS.black,
     backgroundColor: COLORS.white,
-    marginVertical: 5,
-    width: "80%",
+    marginVertical: 10,
+    width: "75%",
   },
 
   buttonContainer: {
     paddingVertical: 15,
+    width: "80%",
   },
 
   helperContainer: {

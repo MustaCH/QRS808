@@ -8,14 +8,11 @@ const initialState = {
 
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GUARDAR_INVITADO: {
-      const { result } = action.payload;
-
+    case GUARDAR_INVITADO:
       return {
         ...state,
-        invitados: [...state.invitados, result.items],
+        invitados: [...state.invitados, action.payload],
       };
-    }
     default:
       return state;
   }

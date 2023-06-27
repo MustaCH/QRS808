@@ -1,16 +1,33 @@
 import { FIREBASE_REALTIME_DB_URL } from "../../constants/firebase/index";
+import { listTypes } from "../types";
 
-// Acción para cargar los invitados desde Realtime Database
+const { CARGAR_INVITADOS, FILTRAR_INVITADOS } = listTypes;
+
 export const cargarInvitados = () => {
-  return (dispatch) => {
-    FIREBASE_REALTIME_DB_URL.ref("invitados").on("value", (snapshot) => {
-      const invitados = snapshot.val();
-      dispatch({ type: CARGAR_INVITADOS, payload: invitados });
-    });
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/invitados.json`);
+      const data = await response.json();
+
+      console.warn(data);
+
+      if (data) {
+        const invitados = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+
+        dispatch({
+          type: CARGAR_INVITADOS,
+          payload: invitados,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
-// Acción para filtrar los invitados por nombre
 export const filtrarInvitados = (texto) => {
   return { type: FILTRAR_INVITADOS, payload: texto };
 };
