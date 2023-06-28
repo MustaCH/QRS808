@@ -1,15 +1,17 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../constants/themes/colors";
 
 export const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     justifyContent: "flex-start",
-    backgroundColor: "#fff",
+    backgroundColor: COLORS.background,
     borderRadius: 8,
+    borderColor: COLORS.tertiary,
+    borderWidth: 2,
     paddingHorizontal: 16,
     paddingVertical: 12,
-    marginBottom: 8,
-    width: 310,
+    marginVertical: 8,
   },
   itemContainer: {
     flexDirection: "row",
@@ -17,6 +19,12 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontWeight: "bold",
-    marginRight: 8,
+    color: COLORS.tertiary,
+    marginHorizontal: 8,
+  },
+
+  value: {
+    color: COLORS.white,
+    marginHorizontal: 8,
   },
 });

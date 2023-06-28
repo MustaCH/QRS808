@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, Button, ScrollView } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { styles } from "./style";
 import { COLORS } from "../../constants/themes/colors";
-import { formularioReducer } from "../../store/reducers/index";
 import { guardarInvitado } from "../../store/actions/index";
 import { Input } from "../../components/index";
 
@@ -16,8 +15,54 @@ const Form = ({ navigation }) => {
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
   const [entradas, setEntradas] = useState(1);
+  const [generarDisabled, setGenerarDisabled] = useState(true);
+  const [nombreError, setNombreError] = useState("");
+  const [apellidoError, setApellidoError] = useState("");
+  const [dniError, setDniError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const validarCampos = () => {
+    let valid = true;
+
+    const letrasRegex = /^[a-zA-Z\s]*$/;
+    if (!letrasRegex.test(nombre)) {
+      setNombreError("*Ingrese un nombre válido*");
+      valid = false;
+    } else {
+      setNombreError("");
+    }
+
+    if (!letrasRegex.test(apellido)) {
+      setApellidoError("*Ingrese un apellido válido*");
+      valid = false;
+    } else {
+      setApellidoError("");
+    }
+
+    const dniRegex = /^\d{1,9}$/;
+    if (!dniRegex.test(dni)) {
+      setDniError("*Ingrese un DNI válido*");
+      valid = false;
+    } else {
+      setDniError("");
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("*Ingrese un email válido*");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+
+    return valid;
+  };
 
   const handleSubmit = () => {
+    if (!validarCampos()) {
+      return;
+    }
+
     const invitado = {
       nombre,
       apellido,
@@ -33,6 +78,26 @@ const Form = ({ navigation }) => {
     setDni("");
     setEmail("");
     setEntradas(1);
+  };
+
+  const handleNombreChange = (text) => {
+    setNombre(text);
+    setGenerarDisabled(!validarCampos());
+  };
+
+  const handleApellidoChange = (text) => {
+    setApellido(text);
+    setGenerarDisabled(!validarCampos());
+  };
+
+  const handleDniChange = (text) => {
+    setDni(text);
+    setGenerarDisabled(!validarCampos());
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    setGenerarDisabled(!validarCampos());
   };
 
   const renderPickerItems = () => {
@@ -53,18 +118,20 @@ const Form = ({ navigation }) => {
           placeholder="Nombre"
           value={nombre}
           autoCorrect={false}
-          onChangeText={(text) => setNombre(text)}
+          onChangeText={handleNombreChange}
           label="Nombre"
-          error="*ingrese un nombre válido*"
+          hasError={nombreError !== ""}
+          error={nombreError}
           touched={true}
         />
         <Input
           placeholder="Apellido"
           value={apellido}
           autoCorrect={false}
-          onChangeText={(text) => setApellido(text)}
+          onChangeText={handleApellidoChange}
           label="Apellido"
-          error="*ingrese un apellido válido*"
+          hasError={apellidoError !== ""}
+          error={apellidoError}
           touched={true}
         />
         <Input
@@ -72,9 +139,10 @@ const Form = ({ navigation }) => {
           value={dni}
           keyboardType="numeric"
           autoCorrect={false}
-          onChangeText={(text) => setDni(text)}
+          onChangeText={handleDniChange}
           label="DNI"
-          error="*ingrese un DNI válido*"
+          hasError={dniError !== ""}
+          error={dniError}
           touched={true}
         />
         <Input
@@ -82,9 +150,10 @@ const Form = ({ navigation }) => {
           value={email}
           keyboardType="email-address"
           autoCorrect={false}
-          onChangeText={(text) => setEmail(text)}
+          onChangeText={handleEmailChange}
           label="E-mail"
-          error="*ingrese un e-mail válido*"
+          hasError={emailError !== ""}
+          error={emailError}
           touched={true}
         />
         <Text style={styles.labelEntradas}>Entradas</Text>
@@ -95,7 +164,12 @@ const Form = ({ navigation }) => {
           {renderPickerItems()}
         </Picker>
         <View style={styles.buttonContainer}>
-          <Button color={COLORS.secondary} title="Generar" onPress={handleSubmit} />
+          <Button
+            color={COLORS.secondary}
+            title="Generar"
+            onPress={handleSubmit}
+            disabled={generarDisabled}
+          />
         </View>
         <View style={styles.helperContainer}>
           <Text style={styles.helper}>*Se enviará una invitación vía email al invitado*</Text>
