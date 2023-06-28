@@ -6,6 +6,7 @@ import { styles } from "./style";
 import { COLORS } from "../../constants/themes/colors";
 import { guardarInvitado } from "../../store/actions/index";
 import { Input } from "../../components/index";
+import { enviarCorreo } from "../../utils/functions";
 
 const Form = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -47,7 +48,8 @@ const Form = ({ navigation }) => {
       setDniError("");
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     if (!emailRegex.test(email)) {
       setEmailError("*Ingrese un email válido*");
       valid = false;
@@ -78,6 +80,8 @@ const Form = ({ navigation }) => {
     setDni("");
     setEmail("");
     setEntradas(1);
+
+    enviarCorreo(invitado);
   };
 
   const handleNombreChange = (text) => {

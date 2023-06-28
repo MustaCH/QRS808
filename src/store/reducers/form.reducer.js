@@ -13,6 +13,9 @@ const formReducer = (state = initialState, action) => {
         ...state,
         invitados: [...state.invitados, action.payload],
       };
+    case ENVIAR_INVITACION:
+      // Aquí puedes realizar alguna lógica adicional si es necesario
+      return state;
     default:
       return state;
   }
