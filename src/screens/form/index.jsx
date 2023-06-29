@@ -6,7 +6,7 @@ import { styles } from "./style";
 import { COLORS } from "../../constants/themes/colors";
 import { guardarInvitado } from "../../store/actions/index";
 import { Input } from "../../components/index";
-import { enviarCorreo } from "../../utils/functions";
+import { insertInvitado } from "../../db";
 
 const Form = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -75,13 +75,25 @@ const Form = ({ navigation }) => {
 
     dispatch(guardarInvitado(invitado));
 
+    insertInvitado(
+      invitado.nombre,
+      invitado.apellido,
+      invitado.dni,
+      invitado.email,
+      invitado.entradas
+    )
+      .then(() => {
+        console.log("Invitado almacenado");
+      })
+      .catch((error) => {
+        console.log("Error al cargar invitado", error);
+      });
+
     setNombre("");
     setApellido("");
     setDni("");
     setEmail("");
     setEntradas(1);
-
-    enviarCorreo(invitado);
   };
 
   const handleNombreChange = (text) => {
@@ -174,9 +186,6 @@ const Form = ({ navigation }) => {
             onPress={handleSubmit}
             disabled={generarDisabled}
           />
-        </View>
-        <View style={styles.helperContainer}>
-          <Text style={styles.helper}>*Se enviará una invitación vía email al invitado*</Text>
         </View>
       </View>
     </ScrollView>

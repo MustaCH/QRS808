@@ -4,6 +4,16 @@ import { Provider } from "react-redux";
 import { styles } from "./style";
 import Navigation from "./navigation";
 import store from "./store/index";
+import { init } from "./db";
+
+init()
+  .then(() => {
+    console.log("Base inicializada");
+  })
+  .catch((err) => {
+    console.log("Error al inizaliar");
+    console.log(err);
+  });
 
 export default function App() {
   const [loaded] = useFonts({

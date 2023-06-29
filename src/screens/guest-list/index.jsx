@@ -12,10 +12,6 @@ const GuestList = () => {
   const invitados = useSelector((state) => state.guestList.invitados);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    dispatch(cargarInvitados());
-  }, [dispatch]);
-
   const onDelete = (id) => {
     Alert.alert(
       "Eliminar invitado",
@@ -54,6 +50,10 @@ const GuestList = () => {
       return null;
     }
   };
+
+  useEffect(() => {
+    dispatch(cargarInvitados());
+  }, []);
 
   return (
     <View style={styles.container}>

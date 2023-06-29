@@ -8,7 +8,7 @@ import { COLORS } from "../../constants/themes/colors";
 const Scanner = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState("No escaneado");
+  const [text, setText] = useState("");
 
   const askForPermission = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -22,7 +22,7 @@ const Scanner = () => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setText(data);
-    console.warn("Type: " + type + "\nData: " + data);
+    console.log("Type: " + type + "\nData: " + data);
   };
 
   if (hasPermission === null) {
@@ -47,11 +47,13 @@ const Scanner = () => {
       <View style={styles.scannerContainer}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
+          style={styles.scanner}
         />
       </View>
       <View>
-        <Text>{text}</Text>
+        <View style={styles.scannedTextContainer}>
+          <Text style={styles.scannedText}>{text}</Text>
+        </View>
         {scanned && (
           <Button
             title="Volver a escanear"

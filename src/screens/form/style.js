@@ -44,17 +44,6 @@ export const styles = StyleSheet.create({
     width: "80%",
   },
 
-  helperContainer: {
-    marginVertical: 5,
-  },
-
-  helper: {
-    fontSize: 11,
-    fontFamily: "MerriweatherSans-Regular",
-    color: COLORS.tertiary,
-    paddingVertical: 10,
-  },
-
   errorText: {
     color: "red",
     fontFamily: "MerriweatherSans-Light",

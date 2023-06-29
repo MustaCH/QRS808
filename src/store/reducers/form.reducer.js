@@ -14,8 +14,7 @@ const formReducer = (state = initialState, action) => {
         invitados: [...state.invitados, action.payload],
       };
     case ENVIAR_INVITACION:
-      // Aquí puedes realizar alguna lógica adicional si es necesario
-      return state;
+      return { ...state, data: state.invitados.filter((invitados) => invitados.id != action.id) };
     default:
       return state;
   }
