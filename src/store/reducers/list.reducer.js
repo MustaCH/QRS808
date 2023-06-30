@@ -16,7 +16,7 @@ const guestListReducer = (state = initialState, action) => {
     case BORRAR_INVITADOS:
       return {
         ...state,
-        invitados: state.invitados.filter((invitado) => invitado.id !== action.id),
+        invitados: state.invitados.filter((invitado) => invitado.id !== action.invitadoId),
       };
     default:
       return state;

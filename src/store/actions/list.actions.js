@@ -1,6 +1,6 @@
+import { listTypes } from "../types";
 import { Alert } from "react-native";
 import { FIREBASE_REALTIME_DB_URL } from "../../constants/firebase/index";
-import { listTypes } from "../types";
 
 const { CARGAR_INVITADOS, BORRAR_INVITADOS } = listTypes;
 
@@ -43,7 +43,7 @@ export const borrarInvitados = (id) => {
 
       dispatch({
         type: BORRAR_INVITADOS,
-        payload: id,
+        invitadoId: id,
       });
     } catch (error) {
       Alert.alert("Error al eliminar el invitado:", error);

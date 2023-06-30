@@ -12,6 +12,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     marginVertical: 8,
+    shadowColor: COLORS.tertiary,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 4.65,
+
+    elevation: 6,
   },
   itemContainer: {
     flexDirection: "row",

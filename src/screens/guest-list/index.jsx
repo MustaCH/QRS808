@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { View, FlatList, TextInput, Alert } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -6,6 +6,7 @@ import { ListItem } from "../../components/index";
 import { cargarInvitados, borrarInvitados } from "../../store/actions";
 import { styles } from "./style";
 import { COLORS } from "../../constants/themes/colors";
+import { useFocusEffect } from "@react-navigation/native";
 
 const GuestList = () => {
   const dispatch = useDispatch();
@@ -51,9 +52,11 @@ const GuestList = () => {
     }
   };
 
-  useEffect(() => {
-    dispatch(cargarInvitados());
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(cargarInvitados());
+    }, [dispatch])
+  );
 
   return (
     <View style={styles.container}>

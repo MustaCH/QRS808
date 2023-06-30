@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "MerriweatherSans-Medium",
     color: COLORS.tertiary,
-    textAlign: "center",
   },
 
   subLabel: {

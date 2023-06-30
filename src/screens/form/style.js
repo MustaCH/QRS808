@@ -25,6 +25,12 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
+  input: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
   labelEntradas: {
     fontSize: 14,
     fontFamily: "MerriweatherSans-Medium",

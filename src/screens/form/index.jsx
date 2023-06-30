@@ -139,6 +139,7 @@ const Form = ({ navigation }) => {
           hasError={nombreError !== ""}
           error={nombreError}
           touched={true}
+          style={styles.input}
         />
         <Input
           placeholder="Apellido"
@@ -149,6 +150,7 @@ const Form = ({ navigation }) => {
           hasError={apellidoError !== ""}
           error={apellidoError}
           touched={true}
+          style={styles.input}
         />
         <Input
           placeholder="DNI"
@@ -160,6 +162,7 @@ const Form = ({ navigation }) => {
           hasError={dniError !== ""}
           error={dniError}
           touched={true}
+          style={styles.input}
         />
         <Input
           placeholder="Email"
@@ -171,6 +174,7 @@ const Form = ({ navigation }) => {
           hasError={emailError !== ""}
           error={emailError}
           touched={true}
+          style={styles.input}
         />
         <Text style={styles.labelEntradas}>Entradas</Text>
         <Picker
