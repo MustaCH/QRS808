@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
   },
-  errorContainer: {},
+
   errorMessage: {
     color: "red",
     fontFamily: "MerriweatherSans-Light",

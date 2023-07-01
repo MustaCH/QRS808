@@ -30,10 +30,10 @@ export const cargarInvitados = () => {
   };
 };
 
-export const borrarInvitados = (id) => {
+export const borrarInvitados = (key) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/invitados/${id}.json`, {
+      const response = await fetch(`${FIREBASE_REALTIME_DB_URL}/invitados/${key}.json`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -41,9 +41,14 @@ export const borrarInvitados = (id) => {
       });
       const data = await response.json();
 
+      const invitados = Object.keys(data).map((key) => ({
+        ...data[key],
+        id: key,
+      }));
+
       dispatch({
         type: BORRAR_INVITADOS,
-        invitadoId: id,
+        invitadoId: invitados,
       });
     } catch (error) {
       Alert.alert("Error al eliminar el invitado:", error);

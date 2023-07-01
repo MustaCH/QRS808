@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Form, GuestList, Scanner } from "../../screens";
+import { LogoHeader } from "../../components";
 import { COLORS } from "../../constants";
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +17,13 @@ const MainNavigator = () => {
           fontFamily: "MerriweatherSans-Bold",
         },
       }}>
-      <Stack.Screen name="HOME" component={Form} />
+      <Stack.Screen
+        name="HOME"
+        component={Form}
+        options={{
+          headerTitle: (props) => <LogoHeader {...props} />,
+        }}
+      />
       <Stack.Screen name="Lista de invitados" component={GuestList} />
       <Stack.Screen name="QR Scanner" component={Scanner} />
     </Stack.Navigator>

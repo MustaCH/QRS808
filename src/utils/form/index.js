@@ -2,6 +2,7 @@ const formatName = /^[a-zA-Z\s]*$/;
 const formatDNI = /^\d{1,9}$/;
 const formatEmail =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const minPasswordLength = 7;
 
 export const UPDATED_FORM = "UPDATED_FORM";
 
@@ -16,10 +17,10 @@ const validateInput = ({ name, value }) => {
         hasError = true;
         error = "El nombre es requerido";
       } else if (!formatName.test(formatValue)) {
-        hasError: true;
+        hasError = true;
         error = "El nombre es inválido";
       } else {
-        hasError: false;
+        hasError = false;
         error = "";
       }
       break;
@@ -28,10 +29,10 @@ const validateInput = ({ name, value }) => {
         hasError = true;
         error = "El apellido es requerido";
       } else if (!formatName.test(formatValue)) {
-        hasError: true;
+        hasError = true;
         error = "El apellido es inválido";
       } else {
-        hasError: false;
+        hasError = false;
         error = "";
       }
       break;
@@ -40,22 +41,34 @@ const validateInput = ({ name, value }) => {
         hasError = true;
         error = "El DNI es requerido";
       } else if (!formatDNI.test(formatValue)) {
-        hasError: true;
+        hasError = true;
         error = "El DNI es inválido";
       } else {
-        hasError: false;
+        hasError = false;
         error = "";
       }
       break;
     case "email":
       if (formatValue === "") {
         hasError = true;
-        error = "El E-mail es requerido";
+        error = "El email es requerido";
       } else if (!formatEmail.test(formatValue)) {
-        hasError: true;
-        error = "El E-mail es inválido";
+        hasError = true;
+        error = "El email es inválido";
       } else {
-        hasError: false;
+        hasError = false;
+        error = "";
+      }
+      break;
+    case "password":
+      if (formatValue === "") {
+        hasError = true;
+        error = "La contraseña es requerida";
+      } else if (formatValue.length < minPasswordLength) {
+        hasError = true;
+        error = `Debe tener al menos ${minPasswordLength} caracteres`;
+      } else {
+        hasError = false;
         error = "";
       }
       break;

@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
+    fontSize: 20,
     fontFamily: "MerriweatherSans-ExtraBold",
     color: COLORS.tertiary,
     paddingVertical: 10,
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "MerriweatherSans-Medium",
     color: COLORS.tertiary,
-    textAlign: "center",
+    textAlign: "left",
   },
 
   picker: {

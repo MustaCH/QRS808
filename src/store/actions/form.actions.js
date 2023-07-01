@@ -1,8 +1,7 @@
 import { formTypes } from "../types";
 import { FIREBASE_REALTIME_DB_URL } from "../../constants/firebase";
-import { sendEmail } from "../../utils/mailer";
 
-const { GUARDAR_INVITADO, ENVIAR_INVITACION } = formTypes;
+const { GUARDAR_INVITADO } = formTypes;
 
 export const guardarInvitado = (invitado) => {
   return async (dispatch) => {

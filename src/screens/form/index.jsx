@@ -128,7 +128,7 @@ const Form = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Ingresa datos del invitado:</Text>
+          <Text style={styles.title}>INGRESA DATOS DEL INVITADO:</Text>
         </View>
         <Input
           placeholder="Nombre"

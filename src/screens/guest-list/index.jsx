@@ -13,22 +13,8 @@ const GuestList = () => {
   const invitados = useSelector((state) => state.guestList.invitados);
   const [searchText, setSearchText] = useState("");
 
-  const onDelete = (id) => {
-    Alert.alert(
-      "Eliminar invitado",
-      "¿Estás seguro que deseas eliminar este invitado?",
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Eliminar",
-          style: "destructive",
-          onPress: () => {
-            dispatch(borrarInvitados(id));
-          },
-        },
-      ],
-      { cancelable: true }
-    );
+  const onDelete = (key) => {
+    dispatch(borrarInvitados(key));
   };
 
   const renderInvitado = ({ item }) => {
